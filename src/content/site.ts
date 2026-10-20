@@ -1,48 +1,20 @@
 import type { SiteContent } from "./types";
 
-/**
- * Uncle Charlie's Sandwiches (Jacksonville, FL): the only editable content file. Data only.
- *
- * Shapes: src/content/types.ts + CONTENT_SCHEMA.md in skate28/uncle-charlies (local copy:
- * handoff/types.reference.ts, byte-for-byte). Researched 2026-10-20; sources in research_brief.md.
- * No owner/staff names, personal emails, reviewer names or photo-source URLs in this file.
- *
- * WEBSITES: the business has no website. Facebook (facebook.com/ucharliespizza) is its only
- * presence. Two look-alike domains are NOT theirs and must never be linked:
- *   - unclecharlies[.]com = Uncle Charlie's liquor store / grill & tavern in Cheyenne, WY.
- *   - unclecharliespizza[.]com = redirects to an unrelated ocean-policy site (domain expires 2026-10-26).
- *
- * Ordering: phone + walk-in (dine-in / takeout). Verified: Uber Eats store "Closed on Uber Eats as of
- * Apr 8, 2024"; DoorDash store "not active" and "unaffiliated with DoorDash"; no Grubhub store found;
- * Google shows no "Order online" button; no Toast/Clover/Square page found. So the only CTA is the phone.
- *
- * Menu: item list from the shop's own printed takeout menu (photo posted on its Facebook page,
- * undated, mirrored by Restaurantji), cross-checked with DoorDash/Grubhub-derived item lists and the
- * SinglePlatform/Yelp menu. PRICES OMITTED: every price source is old or conflicting (see brief §2).
- *
- * Photos: real customer photos from the Google Maps listing (13) and two more Google-credited
- * photos mirrored by Restaurantji. Pitch use only until the owner approves. No logo found.
- */
 
 const MAP_URL =
   "https://www.google.com/maps/search/?api=1&query=Uncle+Charlie%27s+Sandwiches+Inc+1977+Lane+Ave+S+Jacksonville+FL+32210&query_place_id=ChIJr67HTZa45YgRYTzKTbnPSL8";
 const YELP_URL = "https://www.yelp.com/biz/uncle-charlies-sandwiches-jacksonville";
 
 export const site: SiteContent = {
-  // Google lists "Uncle Charlie's Sandwiches Inc."; the sign reads "Uncle Charlie's Sandwiches";
-  // Facebook/Apple Maps call it "Uncle Charlie's Pizza and Subs". Repo default name kept.
   name: "Uncle Charlie's Sandwiches",
   tagline: "Italian subs, pizza & sandwiches",
   description:
     "Uncle Charlie's Sandwiches is a family-run Italian pizza and sub shop at 1977 Lane Ave S on Jacksonville's Westside, serving homemade-dough pizza, hot and cold subs, steak subs, pasta and salads since 1977. Open Tuesday–Sunday; closed Monday. Call (904) 781-4770.",
-  // Facebook post 2026-07-08: "a major milestone with 49 years of service"; Facebook graphic (2021):
-  // "Made in July 1977"; Restaurantji summary + Google review: "since they first opened way back in 1977".
   opened: "1977",
 
   address: {
     street: "1977 Lane Ave S",
     suite: "",
-    // Yelp: "Westside"; Google/exa area: Hyde Park.
     neighborhood: "Westside",
     city: "Jacksonville",
     region: "FL",
@@ -50,17 +22,14 @@ export const site: SiteContent = {
     country: "US",
     full: "1977 Lane Ave S, Jacksonville, FL 32210",
   },
-  // Storefront photos show the shop's own lot; Apple Maps lists "Parking Lot".
   locationHint: "On Lane Avenue South in Hyde Park, with a parking lot out front.",
 
-  // Google Maps pin (feature 0x88e5b8964dc7aeaf:0xbf48cfb94dca3c61), read live 2026-10-20.
   geo: {
     latitude: 30.2826824,
     longitude: -81.7549209,
   },
   mapUrl: MAP_URL,
 
-  // Google, Apple Maps, Facebook, Yelp, SinglePlatform, Restaurantji and the printed menu all agree.
   phone: {
     display: "(904) 781-4770",
     tel: "tel:+19047814770",
@@ -70,9 +39,6 @@ export const site: SiteContent = {
   closedNotice:
     "We're closed right now. We're open Tuesday–Wednesday and Sunday 11 AM–9 PM, and Thursday–Saturday 11 AM–10 PM. Closed Mondays.",
 
-  // Verified live on Google Maps 2026-10-20 (per-day hours); matches Yelp, Restaurantji, exa/Google mirror
-  // and Chamber of Commerce. Visit Jacksonville's older listing ("Sun–Thu 11AM–10PM") is out of date.
-  // Holiday closures are announced on Facebook (e.g. Dec 24 2025–Jan 1 2026; July 4–6 2026).
   hours: {
     timezone: "America/New_York",
     summary: "Tue–Wed 11 AM–9 PM · Thu–Sat 11 AM–10 PM · Sun 11 AM–9 PM · Closed Monday",
@@ -89,18 +55,13 @@ export const site: SiteContent = {
     },
   },
 
-  // "$" on Yelp, Facebook and Restaurantji.
   priceRange: "$",
-  // Only Apple Maps says "Accepts contactless payments". Hidden until the owner confirms.
   paymentNote: "",
 
-  // Phone + walk-in only (see header). No delivery links: Uber Eats closed 2024, DoorDash inactive.
   orderingLinks: [{ label: "Call to order", href: "tel:+19047814770", kind: "phone" }],
 
-  // Active page: posts through Aug 2026, 3.5K followers. Listed as the website on Google and Apple Maps.
   socials: [{ label: "Facebook", href: "https://www.facebook.com/ucharliespizza/" }],
 
-  // Google Maps, read live 2026-10-20.
   rating: {
     value: 4.7,
     count: 1304,
@@ -108,15 +69,8 @@ export const site: SiteContent = {
     sourceUrl: MAP_URL,
   },
 
-  // Yelp 4.4 from 80: Yelp data on Apple Maps, read live 2026-10-20 (yelp.com blocks automated
-  // fetches; an older Yelp search snippet shows 4.3 from 68). No Tripadvisor listing found.
-  // Not shown: Facebook "94% recommend (401 reviews)" (not a star score), Restaurantji 4.5/329
-  // (aggregator), DoorDash 4.6/100+ (store inactive).
   extraRatings: [{ value: 4.4, count: 80, source: "Yelp", sourceUrl: YELP_URL }],
 
-  // Verbatim excerpts from public reviews (whole sentences, original spelling/punctuation). Platform
-  // label only; sourceUrl is the platform's business page. Reviewer initials/dates: research_brief.md §3a.
-  // OWNER APPROVAL NEEDED: get the owner's OK before quoting these on a live site.
   testimonials: [
     {
       quote:
@@ -138,14 +92,6 @@ export const site: SiteContent = {
       sourceUrl: MAP_URL,
     },
     {
-      // Seen on the exa.ai mirror of the Google listing only (2025-11-04); not yet seen on Google directly.
-      quote: "Old school mom and pop feel. The toppings were abundant! Highly recommend.",
-      rating: 5,
-      sourceLabel: "Google",
-      sourceUrl: MAP_URL,
-    },
-    {
-      // Yelp review as shown on Apple Maps (star rating not shown there).
       quote: "Always great food! Always fresh they make their own pizza dough.",
       sourceLabel: "Yelp",
       sourceUrl: YELP_URL,
@@ -169,17 +115,14 @@ export const site: SiteContent = {
       answer: "Call us at (904) 781-4770 or order at the counter. Eat in or take it to go.",
     },
     {
-      // Printed menu header "Pizza (Homemade pizza dough)"; SinglePlatform "Homemade pizza dough".
       question: "Do you make your own pizza dough?",
       answer: "Yes. Our pizza dough is homemade.",
     },
     {
-      // Printed menu: "Beer (With food purchase only)", Bud Light / Budweiser, mug or pitcher.
       question: "Do you serve beer?",
       answer: "Yes. Bud Light and Budweiser by the mug or pitcher, with a food purchase.",
     },
     {
-      // Facebook "Outdoor seating"; Apple Maps "Outdoor Dining"; photos of the covered front walkway.
       question: "Can we sit outside?",
       answer: "Yes. There are tables out front under the covered walkway, plus seating inside.",
     },
@@ -191,8 +134,6 @@ export const site: SiteContent = {
 
   menuNote: "Homemade pizza dough. Subs come small or large. Call (904) 781-4770 for current prices.",
 
-  // Items from the shop's printed takeout menu (see header + brief §2). No prices (old/conflicting).
-  // `signature` = most-mentioned dishes in reviews (steak sub, Italian/Special subs, lasagna, pizza).
   menu: [
     {
       id: "pizza",
@@ -231,7 +172,6 @@ export const site: SiteContent = {
         { id: "turkey-sub", name: "Turkey" },
         { id: "pastrami-sub", name: "Pastrami" },
         { id: "salami-sub", name: "Salami" },
-        // DoorDash/Grubhub item lists name these four "... Parmesan".
         { id: "chicken-sub", name: "Chicken Parmesan" },
         { id: "veal-sub", name: "Veal Parmesan" },
         { id: "meatball-sub", signature: true, name: "Meatball Parmesan" },
@@ -330,7 +270,6 @@ export const site: SiteContent = {
     },
   ],
 
-  // Real customer photos (see images/MANIFEST.md); credit keys only, no URLs. Owner's OK needed.
   photos: [
     { src: "/images/hero-half-and-half-pizza.jpg", alt: "Large pizza topped half with pepperoni and half with crumbled meat", category: "food", credit: "google-maps-ugc", width: 1200, height: 1600, hero: true },
     { src: "/images/pepperoni-pizza.jpg", alt: "Pepperoni pizza on a metal tray", category: "food", credit: "google-maps-ugc", width: 1600, height: 1200 },
@@ -350,7 +289,6 @@ export const site: SiteContent = {
   ],
   heroImage: "/images/hero-half-and-half-pizza.jpg",
 
-  // Red/green/white from the storefront trim and Italian flag; mustard from the window lettering.
   palette: {
     ink: "#2A2420",
     brand: "#B8322A",
@@ -362,10 +300,6 @@ export const site: SiteContent = {
   },
 
   about: {
-    // Verified: open since July 1977 (Facebook posts 2021 + 2026); family-owned and operated with the
-    // same family behind the counter for years (Restaurantji summary, Google/Yelp reviews); homemade dough
-    // (printed menu); open kitchen (Google review via exa mirror + photos); carry-out help for customers
-    // (Google review, live). Neutral wording; no owner/staff names.
     heading: "A Westside pizza and sub shop since 1977",
     paragraphs: [
       "Uncle Charlie's has been making pizza, subs and pasta on Lane Avenue South since July 1977. It's a family-run, old-school Italian shop, and plenty of today's regulars first came in as kids.",
@@ -384,6 +318,5 @@ export const site: SiteContent = {
       "Homemade-dough pizza, Italian subs, steak subs, lasagna and salads at 1977 Lane Ave S, Jacksonville, FL since 1977. Tue–Sun from 11 AM; closed Monday. Call (904) 781-4770.",
   },
 
-  // Footer credit is handled by the dev (repo default kept).
   footerCredit: "Built by nicklopacki.com",
 };
