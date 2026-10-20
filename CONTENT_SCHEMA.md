@@ -10,7 +10,6 @@ business copy, prices, hours, or photos.
   ```
 - Shapes follow cafe-genovese; differences are listed at the bottom of `types.ts`.
 - Empty strings, empty arrays, `null`, and absent optional fields hide the matching UI. Nothing renders "coming soon".
-- `src/content/confirmed.ts` shows the confirmed facts as a starting point.
 
 ## Rules
 

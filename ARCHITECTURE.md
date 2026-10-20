@@ -12,14 +12,13 @@ lettering), Yellowtail (script) and DM Sans (body); hard offset shadows, halfton
 | Owner | Files |
 | --- | --- |
 | **Leads** | `src/content/site.ts` (data only), `public/images/` |
-| **Code** | `src/app/`, `src/components/`, `src/lib/`, `src/content/types.ts`, `src/content/index.ts`, `src/content/confirmed.ts`, config, docs |
+| **Code** | `src/app/`, `src/components/`, `src/lib/`, `src/content/types.ts`, `src/content/index.ts`, config, docs |
 
 ```
 src/
   app/          layout (metadata, robots), page, robots.ts, sitemap.ts, icon, OG/Twitter images, not-found
   components/   one file per section + small client islands (hero-title, menu-tabs, shop-status, reveal)
-  content/      types.ts (contract), index.ts (the single import point), confirmed.ts (pre-handoff facts)
-                site.ts  ← Leads-owned, added at handoff
+  content/      types.ts (contract), index.ts (the single import point), site.ts (Leads-owned data)
   lib/          pure helpers: hours, menu, money, ordering, reviews, photos, maps, contact, nav, faq, indexing, site-url
 public/images/  Leads-owned real photos only
 ```
@@ -28,10 +27,10 @@ public/images/  Leads-owned real photos only
 
 Components import content only via `import { site } from "@/content"` (`src/content/index.ts`).
 
-- **Before handoff:** `index.ts` re-exports `./confirmed` — only Leads-confirmed facts (name, tagline,
-  address, phone, Google rating 4.7 / 1,261). Every other field is empty, so those sections render nothing.
-- **At handoff** ("handoff final"): Leads adds `src/content/site.ts` (`export const site: SiteContent = {...}`)
-  and Code changes one line in `index.ts` to `export { site } from "./site";`, then deletes `confirmed.ts`.
+`index.ts` re-exports `./site` (Leads' handoff, wired 2026-10-20). Before the handoff it re-exported a
+confirmed-facts-only file, now deleted.
+
+Code-owned photo maps live in `src/lib/photos.ts` (`PHOTO_ITEM`, `CATEGORY_PHOTO`, `storyPhoto`).
 
 No dynamic/try-import tricks: a plain static re-export keeps the build green before handoff and ships
 no placeholder copy.
