@@ -33,7 +33,7 @@ export const site: SiteContent = {
   paymentNote: "",
   orderingLinks: [],
   socials: [],
-  rating: { value: 4.7, count: 1261, source: "Google" },
+  rating: { value: 4.7, count: 1304, source: "Google" },
   testimonials: [],
   faq: [],
   menuNote: "",
