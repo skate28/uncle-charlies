@@ -94,7 +94,7 @@ export function Hero() {
                 text={badgeText || site.name}
                 center={site.opened.trim() ? `Est. ${site.opened.trim()}` : "★"}
                 small
-                className="absolute -bottom-10 -left-6 w-32 sm:-left-10 sm:w-36"
+                className="absolute -bottom-10 -left-2 w-28 sm:-left-10 sm:w-36"
               />
             </figure>
           ) : (
