@@ -52,11 +52,7 @@ export function Hero() {
                   focusRing,
                 )}
               >
-                <span className="flex text-mustard" aria-hidden="true">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Star key={i} className="size-4 fill-current stroke-ink" strokeWidth={1.5} />
-                  ))}
-                </span>
+                <Star className="size-4 fill-mustard stroke-ink" strokeWidth={1.5} aria-hidden="true" />
                 <span>
                   {score.value.toFixed(1)} on {score.source} · {formatCount(score.count)} reviews
                 </span>
