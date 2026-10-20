@@ -13,13 +13,13 @@ import { phoneLabel, telHref } from "@/lib/contact";
 import { hoursConfirmed } from "@/lib/hours";
 import { directionsHref } from "@/lib/maps";
 import { photoDimensions, heroPhoto } from "@/lib/photos";
-import { formatCount, primaryScore } from "@/lib/reviews";
+import { formatCount, reviewScores } from "@/lib/reviews";
 
 export function Hero() {
   const { main, script } = nameLines(site.name);
   const tel = telHref(site.phone);
   const directions = directionsHref(site);
-  const score = primaryScore(site);
+  const scores = reviewScores(site);
   const photo = heroPhoto(site.photos, site.heroImage);
   const kicker = site.heroKicker?.trim() ?? "";
   const tagline = site.tagline.trim();
@@ -43,9 +43,10 @@ export function Hero() {
           )}
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            {score && (
+            {scores.map((score) => (
               <a
-                href={score.href ?? "#visit"}
+                key={score.source}
+                href={score.href ?? "#reviews"}
                 {...(score.href ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className={cn(
                   "inline-flex items-center gap-2 rounded-full border-2 border-ink bg-cream px-4 py-2 text-sm font-bold text-ink shadow-[3px_3px_0_0_var(--uc-ink)]",
@@ -57,7 +58,7 @@ export function Hero() {
                   {score.value.toFixed(1)} on {score.source} · {formatCount(score.count)} reviews
                 </span>
               </a>
-            )}
+            ))}
             {showStatus && <ShopStatusPill input={clock} />}
           </div>
 
@@ -91,8 +92,9 @@ export function Hero() {
               />
               <SpinBadge
                 text={badgeText || site.name}
-                center={site.address.city.trim() || "★"}
-                className="absolute -bottom-10 -left-10 w-32 sm:w-36"
+                center={site.opened.trim() ? `Est. ${site.opened.trim()}` : "★"}
+                small
+                className="absolute -bottom-10 -left-6 w-32 sm:-left-10 sm:w-36"
               />
             </figure>
           ) : (

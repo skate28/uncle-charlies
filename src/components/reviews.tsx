@@ -77,17 +77,14 @@ export function Reviews() {
                 )}
               >
                 <figure className="flex h-full flex-col">
-                  {quote.rating !== null && <Stars value={quote.rating} />}
-                  <blockquote className="mt-4 flex-1 text-lg leading-relaxed">
-                    <p>
-                      <span aria-hidden="true" className="font-display text-4xl leading-none text-brand">
-                        “
-                      </span>
-                      {quote.quote}
-                      <span aria-hidden="true" className="font-display text-4xl leading-none text-brand">
-                        ”
-                      </span>
-                    </p>
+                  <div className="flex items-start justify-between gap-4">
+                    <span aria-hidden="true" className="-mt-2 font-display text-7xl leading-none text-brand">
+                      “
+                    </span>
+                    {quote.rating !== null && <Stars value={quote.rating} />}
+                  </div>
+                  <blockquote className="mt-1 flex-1 text-lg font-medium leading-relaxed">
+                    <p>{quote.quote}</p>
                   </blockquote>
                   <figcaption className="mt-5 text-sm font-bold uppercase tracking-wider text-ink/70">
                     {quote.href ? (

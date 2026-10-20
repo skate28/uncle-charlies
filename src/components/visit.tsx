@@ -22,7 +22,7 @@ export function Visit() {
   const rows = showHours ? scheduleRows(site.hours) : [];
   const summary = site.hours.summary.trim();
   const clock = { hours: site.hours, closedNotice: site.closedNotice, phone: site.phone };
-  const extras = [site.priceRange.trim(), site.paymentNote.trim()].filter(Boolean);
+  const extras = [site.priceRange.trim() ? `Price range ${site.priceRange.trim()}` : "", site.paymentNote.trim()].filter(Boolean);
   const hint = site.locationHint.trim();
   const neighborhood = site.address.neighborhood.trim();
 

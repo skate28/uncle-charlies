@@ -23,7 +23,7 @@ export function primaryNav(): NavLink[] {
     { href: "#reviews", label: "Reviews", show: hasReviews(site) },
     { href: "#photos", label: "Photos", show: galleryPhotos(site.photos).length > 0 },
     { href: "#order", label: "Order", show: orderingLinks(site).length > 0 },
-    { href: "#visit", label: hoursConfirmed(site.hours) ? "Hours & location" : "Location", show: true },
+    { href: "#visit", label: hoursConfirmed(site.hours) ? "Hours" : "Location", show: true },
     { href: "#faq", label: "FAQ", show: hasFaq() },
   ]
     .filter((link) => link.show)

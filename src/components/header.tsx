@@ -18,8 +18,8 @@ export function Header({ links }: { links: NavLink[] }) {
           <Wordmark name={site.name} />
         </a>
         {links.length > 0 && (
-          <nav aria-label="Sections" className="hidden lg:block">
-            <ul className="flex items-center gap-6 text-sm font-bold uppercase tracking-wider">
+          <nav aria-label="Sections" className="hidden xl:block">
+            <ul className="flex items-center gap-5 whitespace-nowrap text-sm font-bold uppercase tracking-wider">
               {links.map((link) => (
                 <li key={link.href}>
                   <a href={link.href} className={cn("rounded underline-offset-8 hover:text-brand hover:underline", focusRing)}>
@@ -34,7 +34,7 @@ export function Header({ links }: { links: NavLink[] }) {
           <a
             href={tel}
             className={cn(
-              "hidden items-center gap-2 rounded-lg border-2 border-ink bg-brand px-4 py-2 font-display text-lg uppercase tracking-wide text-cream shadow-[3px_3px_0_0_var(--uc-ink)] transition hover:-translate-y-0.5 sm:inline-flex",
+              "hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-lg border-2 border-ink bg-brand px-4 py-2 font-display text-lg uppercase tracking-wide text-cream shadow-[3px_3px_0_0_var(--uc-ink)] transition hover:-translate-y-0.5 sm:inline-flex",
               focusRing,
             )}
           >

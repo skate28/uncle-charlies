@@ -6,6 +6,7 @@ import { site } from "@/content";
 import { cn } from "@/lib/cn";
 import { menuView } from "@/lib/menu";
 import { formatPrice } from "@/lib/money";
+import { photoDimensions, photoForCategory } from "@/lib/photos";
 
 /** Priced menu. Hidden when there are no real categories. */
 export function MenuSection() {
@@ -13,6 +14,10 @@ export function MenuSection() {
     id: category.id,
     name: category.name,
     description: category.description?.trim() ?? "",
+    photo: (() => {
+      const photo = photoForCategory(category.id, site.photos);
+      return photo ? { src: photo.src, alt: photo.alt, ...photoDimensions(photo) } : null;
+    })(),
     items: category.items.map((item) => ({
       id: item.id,
       name: item.name.trim(),

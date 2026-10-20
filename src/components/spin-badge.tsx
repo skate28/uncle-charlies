@@ -1,5 +1,15 @@
 /** Rotating round sticker. `text` runs around the edge; `center` sits in the middle. Decorative only. */
-export function SpinBadge({ text, center, className }: { text: string; center: string; className?: string }) {
+export function SpinBadge({
+  text,
+  center,
+  small = false,
+  className,
+}: {
+  text: string;
+  center: string;
+  small?: boolean;
+  className?: string;
+}) {
   const ring = `${text} • ${text} • `;
   return (
     <div aria-hidden="true" className={className}>
@@ -15,7 +25,7 @@ export function SpinBadge({ text, center, className }: { text: string; center: s
           </text>
         </svg>
         <div className="grid size-[58%] place-items-center rounded-full border-4 border-ink bg-brand text-center">
-          <span className="px-2 font-display text-[clamp(1.05rem,2.6vw,1.75rem)] uppercase leading-none text-cream">{center}</span>
+          <span className={`px-1 text-center font-display uppercase leading-none text-cream ${small ? "text-sm" : "text-xl sm:text-2xl"}`}>{center}</span>
         </div>
       </div>
     </div>

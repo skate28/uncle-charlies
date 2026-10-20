@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { useId, useState } from "react";
 
 import { focusRing } from "@/components/styles";
@@ -20,6 +21,7 @@ export type MenuTabCategory = {
   id: string;
   name: string;
   description: string;
+  photo: { src: string; alt: string; width: number; height: number } | null;
   items: MenuTabItem[];
 };
 
@@ -33,7 +35,11 @@ export function MenuTabs({ categories }: { categories: MenuTabCategory[] }) {
   return (
     <div>
       {categories.length > 1 && (
-        <div role="tablist" aria-label="Menu categories" className="flex flex-wrap gap-3">
+        <div
+          role="tablist"
+          aria-label="Menu categories"
+          className="-mx-5 flex gap-3 overflow-x-auto px-5 pb-3 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+        >
           {categories.map((category) => {
             const selected = category.id === current.id;
             return (
@@ -46,7 +52,7 @@ export function MenuTabs({ categories }: { categories: MenuTabCategory[] }) {
                 aria-controls={`${baseId}-panel`}
                 onClick={() => setActive(category.id)}
                 className={cn(
-                  "rounded-lg border-2 border-ink px-4 py-2 font-display text-lg uppercase tracking-wide transition",
+                  "shrink-0 whitespace-nowrap rounded-lg border-2 border-ink px-4 py-2 font-display text-lg uppercase tracking-wide transition",
                   selected ? "bg-brand text-cream shadow-[3px_3px_0_0_var(--uc-ink)]" : "bg-paper text-ink hover:bg-mustard",
                   focusRing,
                 )}
@@ -72,13 +78,15 @@ export function MenuTabs({ categories }: { categories: MenuTabCategory[] }) {
             exit={reduce ? undefined : { opacity: 0, y: -12 }}
             transition={{ duration: reduce ? 0 : 0.25 }}
           >
+            <div className={cn("grid gap-8", current.photo && "lg:grid-cols-[1fr_17rem]")}>
+            <div>
             <h3 className="font-display text-4xl uppercase text-brand">{current.name}</h3>
             {current.description && <p className="mt-2 max-w-2xl text-ink/75">{current.description}</p>}
             {current.items.length > 0 && (
-              <ul className="mt-6 grid gap-x-12 gap-y-6 md:grid-cols-2">
+              <ul className={cn("mt-6 grid gap-x-10 gap-y-5", current.photo ? "md:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-3")}>
                 {current.items.map((item) => (
-                  <li key={item.id} className="border-b-2 border-dashed border-ink/25 pb-5">
-                    <div className="flex items-baseline gap-3">
+                  <li key={item.id} className="border-b-2 border-dashed border-ink/20 pb-4">
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="font-display text-2xl uppercase leading-tight tracking-wide">{item.name}</span>
                       {item.signature && (
                         <span className="rounded-full bg-mustard px-2 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider text-ink">
@@ -90,9 +98,11 @@ export function MenuTabs({ categories }: { categories: MenuTabCategory[] }) {
                           New
                         </span>
                       )}
-                      <span aria-hidden="true" className="mx-1 flex-1 translate-y-[-0.3em] border-b-2 border-dotted border-ink/30" />
                       {item.prices.length === 0 && item.price && (
-                        <span className="font-display text-2xl text-brand">{item.price}</span>
+                        <>
+                          <span aria-hidden="true" className="mx-1 flex-1 translate-y-[-0.3em] border-b-2 border-dotted border-ink/30" />
+                          <span className="font-display text-2xl text-brand">{item.price}</span>
+                        </>
                       )}
                     </div>
                     {item.prices.length > 0 && (
@@ -109,6 +119,20 @@ export function MenuTabs({ categories }: { categories: MenuTabCategory[] }) {
                 ))}
               </ul>
             )}
+            </div>
+            {current.photo && (
+              <figure className="hidden rotate-2 self-start border-4 border-ink bg-cream p-2 shadow-[6px_6px_0_0_var(--uc-ink)] lg:block">
+                <Image
+                  src={current.photo.src}
+                  alt={current.photo.alt}
+                  width={current.photo.width}
+                  height={current.photo.height}
+                  sizes="272px"
+                  className="aspect-[4/5] h-auto w-full object-cover"
+                />
+              </figure>
+            )}
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>

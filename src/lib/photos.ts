@@ -61,7 +61,33 @@ function slug(src: string): string {
  * Verified photo → menu item id. Checked before the filename guess. Fill in once Leads ships photos.
  * A pair is ignored when that item id is never asked for, or when the file is not in `photos`.
  */
-const PHOTO_ITEM: Readonly<Record<string, string>> = {};
+const PHOTO_ITEM: Readonly<Record<string, string>> = {
+  "/images/french-fries.jpg": "fries",
+  "/images/meatballs-marinara.jpg": "extra-meatball",
+};
+
+/**
+ * Feature photo for a menu category tab, by category id. Code-owned (like PHOTO_ITEM).
+ * Ignored when the file is not in `photos`.
+ */
+const CATEGORY_PHOTO: Readonly<Record<string, string>> = {
+  pizza: "/images/pepperoni-pizza.jpg",
+  subs: "/images/cold-sub-hot-peppers.jpg",
+  "steak-subs": "/images/steak-sub-peppers-onions.jpg",
+  pasta: "/images/meatballs-marinara.jpg",
+  sides: "/images/corn-nuggets.jpg",
+};
+
+export function photoForCategory(id: string, photos: Photo[]): Photo | null {
+  const src = CATEGORY_PHOTO[id];
+  if (!src) return null;
+  return publicPhotos(photos).find((photo) => photo.src.trim() === src) ?? null;
+}
+
+/** Photo beside "Our story": first storefront, else first interior. */
+export function storyPhoto(photos: Photo[]): Photo | null {
+  return photosOfCategory("storefront", photos)[0] ?? photosOfCategory("interior", photos)[0] ?? null;
+}
 
 function mappedPhoto(id: string, photos: Photo[], exclude: string[]): Photo | null {
   const src = Object.entries(PHOTO_ITEM).find(([, itemId]) => itemId === id)?.[0];
